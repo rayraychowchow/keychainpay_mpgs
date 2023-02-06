@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="semi_transparent">#4D000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="list_item_hong_kong_bar_background">#80000000</color>
+    <color name="fragment_background_gray">#EFEFEF</color>
+    <color name="fragment_background_DarkGray">#F5F5F5</color>
+    <!-- used above !-->
+    <color name="kpAppTutorialPurpleButton">#ae11bf</color>
+
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#218595</color>
+
+    <color name="colorPrimaryWhite">#FFFFFF</color>
+    <color name="colorPrimaryWhiteAlpha">#AAFFFFFF</color>
+    <color name="colorPrimaryRed">#FF0000</color>
+
+    <color name="kpTenantBlue">#1B4985</color>
+    <color name="kpLandlordCyan">#218595</color>
+    <color name="kpLandlordCyanInverse">#de7a6a</color>
+    <color name="kpLoginFormLine">#B9BBBD</color>
+    <color name="kpBackgroundGray">#EEEFEF</color>
+    <color name="kpTenantLightBlue">#67b3d2</color>
+
+    <color name="kpFormSectionTitle">#414042</color>
+    <color name="kpFormLabel">#808080</color>
+    <color name="kpFormActionButton">#218595</color>
+    <color name="kpFormTenantActionButton">#42afdc</color>
+    <color name="kpNavigationBarLandlord">#218595</color>
+    <color name="kpNavigationBarTenant">#42afdc</color>
+
+    <color name="kpAssetLandlordOpen">#47a6bb</color>
+    <color name="kpAssetLandlordOpenInfo">#377d89</color>
+    <color name="kpAssetLandlordInvited">#1f606e</color>
+    <color name="kpAssetLandlordPaid">#81bbc3</color>
+    <color name="kpAssetLandlordPaidInfo">#608689</color>
+    <color name="kpAssetLandlordOverdue">#9a3848</color>
+    <color name="kpContractTenantOverdue">#d85259</color>
+    <color name="kpContractTenantInvited">#052532</color>
+    <color name="kpContractTenantPaid">#67b2d2</color>
+    <color name="kpContractTenantCompleted">#1d6e8f</color>
+
+    <color name="kpInfoGrayLight">#929597</color>
+    <color name="kpInfoGrayDark">#414042</color>
+    <color name="kpInfoCyanDark">#24545e</color>
+    <color name="kpInfoBlueDark">#1d6e8f</color>
+    <color name="kpIconGray">#a4a6a9</color>
+    <color name="kpButtonGray">#b9bbbd</color>
+    <color name="kpButtonRed">#9a3848</color>
+    <color name="kpButtonLightCyan">#5ccac5</color>
+    <color name="kpButtonBlue">#0078a9</color>
+    <color name="kpButtonBlueA0">#70000000</color>
+
+    <color name="kpChartPaleGreen">#bee5d8</color>
+    <color name="kpChartGreenBlue">#47c5d9</color>
+    <color name="kpChartGrayDark">#ced0d1</color>
+    <color name="kpChartGrayLight">#e3e4e5</color>
+    <color name="kpChartLightBlue">#b5e8f0</color>
+    <color name="kpChartPaleGreen2">#81bbc3</color>
+
+    <color name="kpChartIncomeLine">#4ec6d6</color>
+    <color name="kpChartIncomeFill">#d8f3f7</color>
+    <color name="kpChartExpenseLine">#686868</color>
+    <color name="kpChartExpenseFill">#999999</color>
+    <color name="kpChartGridLine">#f1f1f1</color>
+
+    <color name="kpTextHintImageBG">#A0FFFFFF</color>
+
+    <color name="kpTextLandingLabel">#B0B0B0</color>
+
+
+    <color name="semi_kpLandlordBlue2">#CC4fbbe8</color>
+    <color name="kpLandlordBlue1">#135677</color>
+    <color name="kpLandlordBlue2">#2480ae</color>
+    <color name="kpLandlordBlue3">#4fbbe8</color>
+    <color name="kpTenantOrange1">#f07f00</color>
+    <color name="kpTenantOrange2">#ee8f20</color>
+    <color name="kpTenantOrange3">#ebb716</color>
+    <color name="kpSignUpLightGrayBG">#eaeaea</color>
+    <color name="kpWhitePlaceholder">#80FFFFFF</color>
+    <color name="kpBlackPlaceholder">#52000000</color>
+    <color name="kpErrorRed1">#e84f4f</color>
+    <color name="kpErrorRed2">#771313</color>
+
+    <color name="kpPageIndicatorWhite">#52FFFFFF</color>
+    <color name="kpWhiteButtonBG">#D9FFFFFF</color>
+
+    <color name="kpDashboardChartBar">#BFFFFFFF</color>
+    <color name="kpAssetChartBar">#CC4fbbe8</color>
+    <color name="kpExpenseLineChart1">#80eab616</color>
+    <color name="kpExpenseLineChart2">#00eab616</color>
+    <color name="kpIncomeExpenseBG">#EBEBEB</color>
+
+    <color name="kpSeperator">#1E000000</color>
+
+    <color name="kpLightGray">#E1E1E1</color>
+
+    <color name="kpCool1">#135677</color>
+    <color name="kpCool2">#4fc0ed</color>
+    <color name="kpCool3">#2483b2</color>
+    <color name="kpCool4">#25c9d6</color>
+    <color name="kpCool5">#0778e8</color>
+    <color name="kpCool6">#2b778e</color>
+    <color name="kpCool7">#5db2b0</color>
+    <color name="kpCool8">#3d5660</color>
+    <color name="kpCool9">#00b7ff</color>
+    <color name="kpCool10">#317777</color>
+    <color name="kpWarm1">#ef7f00</color>
+    <color name="kpWarm2">#efbb16</color>
+    <color name="kpWarm3">#b27b49</color>
+    <color name="kpWarm4">#d39c76</color>
+    <color name="kpWarm5">#a54313</color>
+    <color name="kpWarm6">#eac96c</color>
+    <color name="kpWarm7">#ed6500</color>
+    <color name="kpWarm8">#917257</color>
+    <color name="kpWarm9">#eddd18</color>
+    <color name="kpWarm10">#ed4518</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
+
+
+</resources>
