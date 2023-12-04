@@ -22,8 +22,7 @@ import WebKit
 /// - completed: The authentication was completed.  The status parameter will be a gateway's "acsResult" field.
 /// - cancelled: The result if 3DSecure authentication was cancelled by the user.
 public enum Gateway3DSecureResult {
-    case completed(gatewayResult: GatewayMap, isLast3DS: Bool)
-    case completedWithLast3ds(gatewayMap: GatewayMap)
+    case completed(gatewayResult: GatewayMap)
     case error(Gateway3DSecureError)
     case cancelled
 }
@@ -39,12 +38,9 @@ public enum Gateway3DSecureError: Error {
 }
 
 
-/// A view controller to perform 3DSecure 2.0 authentication using an embeded web view.
+/// A view controller to perform 3DSecure 1.0 authentication using an embeded web view.
 /// This view listens for a redirect in the form of "gatewaysdk://3dsecure?summaryStatus=<STATUS>&3DSecureId=<ID>".  When that redirect occours, it will parse the parameters and return that to the handler provided to the "authenticatePayer" function.
 public class Gateway3DSecureViewController: UIViewController, WKNavigationDelegate {
-    static let GatewayMapResultKey = "ThreeDResult"
-    static let GatewayMapIsLast3dsKey = "isLast3ds"
-    
 
     /// The internal webview used to perform authentication.
     var webView: WKWebView!
@@ -84,7 +80,6 @@ public class Gateway3DSecureViewController: UIViewController, WKNavigationDelega
     fileprivate var gatewayHost: String = "3dsecure"
     fileprivate var gatewayResultParam: String = "acsResult"
     fileprivate var threeDSecureIdParam: String = "3DSecureId"
-    fileprivate var gatewayIsLast3DS: String = "acsIsLast3DS"
     
     fileprivate var completion: ((Gateway3DSecureViewController, Gateway3DSecureResult) -> Void)?
     fileprivate var bodyContent: String? = nil {
@@ -149,76 +144,27 @@ public class Gateway3DSecureViewController: UIViewController, WKNavigationDelega
     }
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        let bundleIdentifier = Bundle.main.bundleIdentifier
-        var isTesting = false
-        if bundleIdentifier == "com.keychainpay.keychainpay-dev" {
-            isTesting = true
-        }
-        if let url = navigationAction.request.url, let comp = URLComponents(url: url, resolvingAgainstBaseURL: false) {
-            if comp.scheme == gatewayScheme, comp.host == gatewayHost {
-                decisionHandler(.cancel)
-
-                let gatewayResultItem = comp.queryItems?.first { (item) -> Bool in
-                    return item.name == gatewayResultParam
-                }
-                
-                let gatewayIsLast3DSItem = comp.queryItems?.first { (item) -> Bool in
-                    return item.name == gatewayIsLast3DS
-                }
-
-                guard let gatewayString = gatewayResultItem?.value, let gatewayData = gatewayString.data(using: .utf8) else {
-                    completion?(self, .error(Gateway3DSecureError.missingGatewayResponse))
-                    return
-                }
-                
-                guard let isLast3DSValue = gatewayIsLast3DSItem?.value else {
-                    completion?(self, .error(Gateway3DSecureError.missingGatewayResponse))
-                    return
-                }
-
-                do {
-                    let gatewayResult = try JSONDecoder().decode(GatewayMap.self, from: gatewayData)
-                    completion?(self, .completed(gatewayResult: gatewayResult, isLast3DS: isLast3DSValue.lowercased() == "true"))
-                } catch {
-                    completion?(self, .error(Gateway3DSecureError.mappingError))
-                }
-            } else if url.absoluteString.contains("complete_3ds.html") {
-                decisionHandler(.cancel)
-
-                if let resultItem = comp.queryItems?.first(where: { (item) -> Bool in
-                    return item.name == "result"
-                }), let isLast3DSResult = comp.queryItems?.first(where: {(item) -> Bool in
-                    return item.name == "isLast3ds"
-                }) {
-                    var gatewayMap = GatewayMap()
-                    gatewayMap[Gateway3DSecureViewController.GatewayMapResultKey] = resultItem.value
-                    gatewayMap[Gateway3DSecureViewController.GatewayMapIsLast3dsKey] = isLast3DSResult.value?.lowercased() == "true"
-                    completion?(self, .completedWithLast3ds(gatewayMap: gatewayMap))
-                } else {
-                    completion?(self, .error(Gateway3DSecureError.missingGatewayResponse))
-                }
-            } else {
-                if isTesting && url.absoluteString.contains("complete_3ds_testing.html") {
-                    decisionHandler(.cancel)
-                    if let resultItem = comp.queryItems?.first(where: { (item) -> Bool in
-                        return item.name == "result"
-                    }), let isLast3DSResult = comp.queryItems?.first(where: {(item) -> Bool in
-                        return item.name == "isLast3ds"
-                    }) {
-                        var gatewayMap = GatewayMap()
-                        gatewayMap[Gateway3DSecureViewController.GatewayMapResultKey] = resultItem.value
-                        gatewayMap[Gateway3DSecureViewController.GatewayMapIsLast3dsKey] = isLast3DSResult.value?.lowercased() == "true"
-                        completion?(self, .completedWithLast3ds(gatewayMap: gatewayMap))
-                    } else {
-                        completion?(self, .error(Gateway3DSecureError.missingGatewayResponse))
-                    }
-                } else {
-                    decisionHandler(.allow)
-                }
+        if let url = navigationAction.request.url, let comp = URLComponents(url: url, resolvingAgainstBaseURL: false), comp.scheme == gatewayScheme, comp.host == gatewayHost {
+            decisionHandler(.cancel)
+            
+            let gatewayResultItem = comp.queryItems?.first { (item) -> Bool in
+                return item.name == gatewayResultParam
             }
-                
+            
+            guard let gatewayString = gatewayResultItem?.value, let gatewayData = gatewayString.data(using: .utf8) else {
+                completion?(self, .error(Gateway3DSecureError.missingGatewayResponse))
+                return
+            }
+            
+            do {
+                let gatewayResult = try JSONDecoder().decode(GatewayMap.self, from: gatewayData)
+                completion?(self, .completed(gatewayResult: gatewayResult))
+            } catch {
+                completion?(self, .error(Gateway3DSecureError.mappingError))
+            }
         } else {
             decisionHandler(.allow)
         }
     }
+    
 }
