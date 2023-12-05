@@ -97,7 +97,7 @@ class MpgsService {
         authView.dismiss(animated: true, completion: { [weak self] in
             guard let this = self else { return }
             switch result {
-            case .completedWithLast3ds(gatewayMap: let gatewayMap):
+            case .completed(gatewayMap: let gatewayMap):
                 this.mpgs3DSecureResult?.onNext(Mpgs3DSecureResult(result: (gatewayMap[Gateway3DSecureViewController.GatewayMapResultKey] as? String) ?? "", isLast3DS: (gatewayMap[Gateway3DSecureViewController.GatewayMapIsLast3dsKey] as? Bool) ?? false))
                 break
             case .completed(gatewayResult: let response, let isLast3DS):
